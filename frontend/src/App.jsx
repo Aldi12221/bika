@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import Layout from './components/Layout';
 import AdminLayout from './components/AdminLayout';
 
@@ -18,6 +18,12 @@ import ManageQuizPage from './pages/admin/ManageQuizPage';
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID';
 
+function UserRouteGuard() {
+  const { user } = useAuth();
+  if (!user) return <Navigate to="/login" replace />;
+  return <Layout />;
+}
+
 function App() {
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
@@ -29,7 +35,7 @@ function App() {
             <Route path="/admin/login" element={<AdminLoginPage />} />
 
             {/* User Pages */}
-            <Route element={<Layout />}>
+            <Route element={<UserRouteGuard />}>
               <Route path="/" element={<Navigate to="/masa-depan" replace />} />
               <Route path="/masa-depan" element={<MasaDepanPage />} />
               <Route path="/tutorial" element={<TutorialPage />} />
@@ -45,7 +51,7 @@ function App() {
               <Route path="/admin/kuis" element={<ManageQuizPage />} />
             </Route>
 
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
