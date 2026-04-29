@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiBookOpen, FiMessageSquare, FiBrain, FiPlay, FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiBookOpen, FiMessageSquare, FiPlay, FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import api from '../utils/api';
 
 const interviewTips = [
