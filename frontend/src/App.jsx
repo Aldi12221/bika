@@ -10,6 +10,7 @@ import ProfilPage from './pages/ProfilPage';
 import TutorialPage from './pages/TutorialPage';
 import QuizPlayPage from './pages/QuizPlayPage';
 import UsahaPage from './pages/UsahaPage';
+import Beranda from './pages/beranda';
 
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
@@ -36,7 +37,7 @@ function App() {
 
             {/* User Pages */}
             <Route element={<UserRouteGuard />}>
-              <Route path="/" element={<Navigate to="/masa-depan" replace />} />
+              <Route path="/" element={<Beranda/>} />
               <Route path="/masa-depan" element={<MasaDepanPage />} />
               <Route path="/tutorial" element={<TutorialPage />} />
               <Route path="/usaha" element={<UsahaPage />} />

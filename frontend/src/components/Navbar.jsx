@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiBookOpen, FiBriefcase, FiUser, FiMenu, FiX, FiLogOut, FiTrendingUp } from 'react-icons/fi';
+import { FiBookOpen, FiBriefcase, FiUser, FiMenu, FiX, FiLogOut, FiTrendingUp, FiMessageCircle } from 'react-icons/fi';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,120 +9,138 @@ export default function Navbar() {
   const location = useLocation();
 
   const navLinks = [
+    { path: '/', label: 'Beranda', icon: null }, // Tambahkan Beranda sesuai gambar
     { path: '/masa-depan', label: 'Masa Depan', icon: <FiTrendingUp /> },
     { path: '/tutorial', label: 'Tutorial', icon: <FiBookOpen /> },
-    { path: '/usaha', label: 'Usaha', icon: <FiBriefcase /> },
-    { path: '/profil', label: 'Profil', icon: <FiUser /> },
+    { path: '/konsultasi', label: 'Konsultasi', icon: <FiMessageCircle /> }, // Ganti Usaha ke Konsultasi sesuai gambar
+    { path: '/tentang-kami', label: 'Tentang Kami', icon: null },
   ];
 
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-strong">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 no-underline">
-            <div className="w-9 h-9 rounded-xl gradient-primary flex items-center justify-center font-bold text-white text-sm shadow-lg">
-              BK
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="flex items-center justify-between h-20">
+          
+          {/* Logo sesuai WhatsApp Image 2026-05-01 at 13.02.09.jpeg */}
+          <Link to="/" className="flex items-center gap-3 no-underline group">
+            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-white text-xl shadow-lg shadow-blue-200 transition-transform group-hover:scale-105">
+              B
             </div>
-            <span className="text-xl font-bold gradient-text">BiKA</span>
+            <div className="flex flex-col leading-none">
+              <span className="text-2xl font-black text-blue-900 tracking-tight">Bika</span>
+              <span className="text-[10px] font-bold text-red-500 uppercase tracking-[0.2em]">Bisa SMK</span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium no-underline transition-all duration-300 ${
+                className={`relative text-sm font-bold no-underline transition-all duration-300 py-2 ${
                   isActive(link.path)
-                    ? 'gradient-primary text-white shadow-lg shadow-primary/25'
-                    : 'text-text-secondary hover:text-text-primary hover:bg-bg-card'
+                    ? 'text-red-500'
+                    : 'text-slate-500 hover:text-blue-600'
                 }`}
               >
-                {link.icon}
                 {link.label}
+                {/* Indikator Garis Bawah Merah sesuai gambar */}
+                {isActive(link.path) && (
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500 rounded-full animate-in fade-in zoom-in duration-300"></span>
+                )}
               </Link>
             ))}
           </div>
 
-          {/* User / Login Button */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* User Section / Login */}
+          <div className="hidden md:flex items-center gap-4">
             {user ? (
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center gap-4 bg-slate-50 p-1.5 pr-4 rounded-2xl border border-slate-100">
+                <div className="flex items-center gap-3">
                   {user.foto ? (
-                    <img src={user.foto} alt="" className="w-8 h-8 rounded-full object-cover border-2 border-primary/30" />
+                    <img src={user.foto} alt="" className="w-9 h-9 rounded-xl object-cover shadow-sm" />
                   ) : (
-                    <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-white text-xs font-bold">
+                    <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white text-sm font-bold shadow-md shadow-blue-100">
                       {user.nama?.charAt(0)}
                     </div>
                   )}
-                  <span className="text-sm font-medium text-text-primary">{user.nama}</span>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-slate-400 font-medium leading-none mb-1">Halo,</span>
+                    <span className="text-sm font-bold text-blue-950 leading-none">{user.nama}</span>
+                  </div>
                 </div>
                 <button
                   onClick={logoutUser}
-                  className="p-2 rounded-lg text-text-muted hover:text-danger hover:bg-danger/10 transition-all duration-300 cursor-pointer bg-transparent border-none"
+                  className="ml-2 p-2 rounded-xl text-slate-400 hover:text-red-500 hover:bg-red-50 transition-all cursor-pointer bg-transparent border-none"
+                  title="Keluar"
                 >
                   <FiLogOut size={18} />
                 </button>
               </div>
             ) : (
-              <Link
-                to="/login"
-                className="btn-primary text-sm no-underline"
-              >
-                Masuk
-              </Link>
+              <div className="flex items-center gap-3">
+                <Link
+                  to="/login"
+                  className="px-8 py-2.5 bg-blue-600 text-white rounded-xl text-sm font-bold no-underline shadow-xl shadow-blue-200 hover:bg-blue-700 hover:-translate-y-0.5 transition-all active:scale-95"
+                >
+                  Login
+                </Link>
+                <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-colors cursor-pointer">
+                  <FiUser size={20} />
+                </div>
+              </div>
             )}
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg text-text-primary bg-transparent border-none cursor-pointer hover:bg-bg-card transition-all"
+            className="lg:hidden p-2 rounded-xl text-blue-900 bg-slate-50 border-none cursor-pointer hover:bg-slate-100 transition-all"
           >
             {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden glass-strong border-t border-border animate-slide-up">
-          <div className="px-4 py-4 space-y-2">
+        <div className="lg:hidden bg-white border-t border-slate-50 absolute w-full shadow-2xl animate-in slide-in-from-top duration-300">
+          <div className="px-6 py-8 space-y-3">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium no-underline transition-all duration-300 ${
+                className={`flex items-center gap-4 px-5 py-4 rounded-2xl text-base font-bold no-underline transition-all ${
                   isActive(link.path)
-                    ? 'gradient-primary text-white'
-                    : 'text-text-secondary hover:text-text-primary hover:bg-bg-card'
+                    ? 'bg-blue-50 text-blue-600'
+                    : 'text-slate-500 hover:bg-slate-50'
                 }`}
               >
-                {link.icon}
+                <span className="text-xl">{link.icon || <FiBriefcase />}</span>
                 {link.label}
               </Link>
             ))}
-            <div className="border-t border-border pt-3 mt-3">
+            
+            <div className="pt-6 mt-6 border-t border-slate-100">
               {user ? (
                 <button
                   onClick={() => { logoutUser(); setIsOpen(false); }}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-danger hover:bg-danger/10 transition-all w-full bg-transparent border-none cursor-pointer"
+                  className="flex items-center gap-4 px-5 py-4 rounded-2xl text-base font-bold text-red-500 hover:bg-red-50 transition-all w-full bg-transparent border-none cursor-pointer"
                 >
-                  <FiLogOut />
-                  Keluar
+                  <FiLogOut size={20} />
+                  Keluar Akun
                 </button>
               ) : (
                 <Link
                   to="/login"
                   onClick={() => setIsOpen(false)}
-                  className="block text-center btn-primary text-sm no-underline"
+                  className="block text-center py-4 bg-blue-600 text-white rounded-2xl font-bold no-underline shadow-lg shadow-blue-200"
                 >
-                  Masuk
+                  Masuk Sekarang
                 </Link>
               )}
             </div>
