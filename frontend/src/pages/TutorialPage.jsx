@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FiBookOpen, FiMessageSquare, FiPlay, FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import api from '../utils/api';
-=======
 import { FiBookOpen, FiClock, FiHelpCircle, FiMessageCircle, FiUserCheck } from 'react-icons/fi';
->>>>>>> 74cdaa9270bf364eebb2185b2e549a0ec419c348
 
 const interviewTips = [
   'Kenali profil perusahaan sebelum wawancara.',
@@ -24,70 +17,84 @@ const psychotestTips = [
 
 export default function TutorialPage() {
   return (
-    <div className="space-y-8">
-      <section className="relative overflow-hidden rounded-2xl gradient-accent p-8 lg:p-10">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
-        <div className="relative z-10">
-          <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Tutorial</h1>
-          <p className="text-white/90 max-w-2xl">
-            Belajar lewat kuis, tips wawancara, dan latihan psikotes untuk persiapan dunia kerja.
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen bg-[#F8FAFC] overflow-x-hidden">
+      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2"></div>
+      <div className="fixed bottom-0 left-0 w-[400px] h-[400px] bg-red-50/60 rounded-full blur-[100px] -z-10 -translate-x-1/2 translate-y-1/2"></div>
 
-      <section className="glass rounded-2xl p-6 sm:p-7">
-        <div className="flex items-start gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center text-white">
-            <FiBookOpen />
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold text-text-primary">Kuis</h2>
-            <p className="text-sm text-text-secondary">Link kuis akan disediakan pada update berikutnya.</p>
-          </div>
-        </div>
-        <div className="bg-bg-card border border-border rounded-xl p-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm text-text-secondary">
-            <FiClock />
-            <span>Status: link kuis nanti disiapkan</span>
-          </div>
-          <button
-            disabled
-            className="px-4 py-2 rounded-lg bg-bg-surface border border-border text-text-muted text-sm cursor-not-allowed"
-          >
-            Segera Hadir
-          </button>
-        </div>
-      </section>
+      <section className="relative px-6 lg:px-12 pt-28 pb-24">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <section className="relative overflow-hidden rounded-[42px] bg-gradient-to-br from-blue-700 via-blue-600 to-red-500 px-8 py-10 lg:px-12 lg:py-14 shadow-[0_40px_80px_-35px_rgba(37,99,235,0.75)]">
+            <div className="absolute -top-16 -right-10 w-56 h-56 bg-white/15 rounded-full blur-2xl"></div>
+            <div className="absolute -bottom-20 -left-14 w-64 h-64 bg-red-300/25 rounded-full blur-2xl"></div>
+            <div className="relative z-10">
+              <h1 className="text-4xl lg:text-6xl font-black text-white tracking-tight mb-3">Tutorial</h1>
+              <p className="text-blue-50 text-lg max-w-2xl leading-relaxed font-medium">
+                Belajar lewat kuis, tips wawancara, dan latihan psikotes untuk persiapan dunia kerja.
+              </p>
+            </div>
+          </section>
 
-      <section className="glass rounded-2xl p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <FiMessageCircle className="text-primary" />
-          <h2 className="text-lg font-semibold text-text-primary">Tips and Trick Wawancara</h2>
-        </div>
-        <ul className="space-y-3">
-          {interviewTips.map((tip) => (
-            <li key={tip} className="bg-bg-card border border-border rounded-xl p-3 text-sm text-text-secondary">
-              {tip}
-            </li>
-          ))}
-        </ul>
-      </section>
+          <section className="bg-white rounded-[36px] border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.03)] p-6 sm:p-8">
+            <div className="flex items-start gap-4 mb-5">
+              <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-100">
+                <FiBookOpen size={20} />
+              </div>
+              <div>
+                <h2 className="text-2xl font-black text-blue-950 tracking-tight">Kuis</h2>
+                <p className="text-sm text-slate-500 font-medium mt-1">Link kuis akan disediakan pada update berikutnya.</p>
+              </div>
+            </div>
+            <div className="rounded-[24px] border border-slate-100 bg-slate-50/70 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="flex items-center gap-2 text-sm text-slate-600 font-medium">
+                <FiClock />
+                <span>Status: kuis akan segera hadir</span>
+              </div>
+              <button
+                disabled
+                className="px-4 py-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-400 text-sm font-bold cursor-not-allowed w-full sm:w-auto"
+              >
+                Segera Hadir
+              </button>
+            </div>
+          </section>
 
-      <section className="glass rounded-2xl p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <FiUserCheck className="text-secondary" />
-          <h2 className="text-lg font-semibold text-text-primary">Test Psikotes</h2>
-        </div>
-        <ul className="space-y-3 mb-4">
-          {psychotestTips.map((tip) => (
-            <li key={tip} className="bg-bg-card border border-border rounded-xl p-3 text-sm text-text-secondary">
-              {tip}
-            </li>
-          ))}
-        </ul>
-        <div className="rounded-xl border border-border bg-bg-card p-4 text-xs text-text-muted flex items-center gap-2">
-          <FiHelpCircle />
-          <span>Bagian latihan soal psikotes online bisa ditautkan saat link kuis sudah siap.</span>
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+            <section className="bg-white rounded-[36px] border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.03)] p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-11 h-11 rounded-2xl bg-red-500/10 text-red-500 flex items-center justify-center">
+                  <FiMessageCircle size={20} />
+                </div>
+                <h2 className="text-2xl font-black text-blue-950 tracking-tight">Tips and Trick Wawancara</h2>
+              </div>
+              <ul className="space-y-3">
+                {interviewTips.map((tip) => (
+                  <li key={tip} className="bg-slate-50/80 border border-slate-100 rounded-[20px] p-4 text-sm text-slate-600 leading-relaxed font-medium">
+                    {tip}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="bg-white rounded-[36px] border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.03)] p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-11 h-11 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center">
+                  <FiUserCheck size={20} />
+                </div>
+                <h2 className="text-2xl font-black text-blue-950 tracking-tight">Test Psikotes</h2>
+              </div>
+              <ul className="space-y-3 mb-5">
+                {psychotestTips.map((tip) => (
+                  <li key={tip} className="bg-slate-50/80 border border-slate-100 rounded-[20px] p-4 text-sm text-slate-600 leading-relaxed font-medium">
+                    {tip}
+                  </li>
+                ))}
+              </ul>
+              <div className="rounded-[20px] border border-slate-100 bg-slate-50/70 p-4 text-xs text-slate-500 flex items-center gap-2 font-medium">
+                <FiHelpCircle />
+                <span>Bagian latihan soal psikotes online bisa ditautkan saat link kuis sudah siap.</span>
+              </div>
+            </section>
+          </div>
         </div>
       </section>
     </div>
