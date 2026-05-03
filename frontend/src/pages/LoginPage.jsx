@@ -49,13 +49,13 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (user) {
-      navigate('/masa-depan', { replace: true });
+      navigate('/', { replace: true });
     }
   }, [user, navigate]);
 
   const finishLogin = (userData) => {
     loginUser(userData);
-    navigate('/masa-depan');
+    navigate('/');
   };
 
   const handleGoogleSuccess = async (credentialResponse) => {
@@ -76,52 +76,34 @@ export default function LoginPage() {
     }
   };
 
-  const handleDemoLogin = () => {
-    finishLogin({
-      id: `demo-${Date.now()}`,
-      nama: 'Pengguna Demo',
-      email: 'demo@bika.local',
-      foto: '',
-    });
-  };
-
   return (
     <div className="min-h-screen bg-[#F8FAFC] overflow-x-hidden relative">
       <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2"></div>
       <div className="fixed bottom-0 left-0 w-[420px] h-[420px] bg-red-50/60 rounded-full blur-[110px] -z-10 -translate-x-1/2 translate-y-1/2"></div>
 
       <div className="relative z-10 px-6 lg:px-12 py-14 lg:py-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 xl:gap-14 items-start">
-          <section className="space-y-8">
-            <div className="inline-flex items-center gap-3 bg-white px-5 py-2.5 rounded-full shadow-sm border border-slate-100">
-              <span className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">BIKA Auth</span>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 gap-10 xl:gap-14 items-start">
+          <section className="space-y-8 text-center w-full mx-auto">
+            <div className="flex justify-center">
+              <div className="inline-flex items-center gap-3 bg-white px-5 py-2.5 rounded-full shadow-sm border border-slate-100">
+                <span className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">
+                LOGIN
+                </span>
+              </div>
             </div>
-
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-blue-950 leading-[1.05] tracking-tight">
                 Masuk ke
                 {' '}
                 <span className="text-red-500">BIKA</span>
               </h1>
-              <p className="text-slate-500 text-lg max-w-xl leading-relaxed font-medium">
+              <p className="text-slate-500 text-lg max-w-xl leading-relaxed font-medium text-center mx-auto">
                 Akses pembelajaran dan persiapan karir dalam pengalaman yang sederhana dan cepat.
               </p>
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {featureList.map((feature) => (
-                <div key={feature.title} className="bg-white rounded-[24px] p-4 border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.03)]">
-                  <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-base mb-3 shadow-md shadow-blue-100">
-                    {feature.icon}
-                  </div>
-                  <p className="text-sm font-black text-blue-950 mb-1">{feature.title}</p>
-                  <p className="text-xs text-slate-500 leading-relaxed font-medium">{feature.desc}</p>
-                </div>
-              ))}
-            </div>
           </section>
 
-          <section className="bg-white rounded-[36px] border border-slate-100 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.12)] p-6 sm:p-8">
+          <section className="w-full max-w-2xl mx-auto bg-white rounded-[36px] border border-slate-100 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.12)] p-6 sm:p-8">
             <div className="rounded-[20px] border border-slate-100 bg-slate-50/70 p-4 mb-4">
               <div className="flex items-center gap-2 mb-1.5">
                 <FiUser className="text-blue-600" />
